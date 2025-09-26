@@ -1,20 +1,17 @@
 BINARY_NAME=main.out
 
-.PHONY: build
+# Use tabs for the recipe lines. "make" requires tabs, not spaces.
+.PHONY: build run clean test
+
 build:
 	go build -o ${BINARY_NAME} cmd/main.go
 
-.PHONY: run
-run:
-	go build -o ${BINARY_NAME} cmd/main.go
+run: build
 	./${BINARY_NAME}
 
-.PHONY: clean
 clean:
 	go clean
-	rm ${BINARY_NAME}
+	rm -f ${BINARY_NAME}
 
-
-.PHONY: build run clean test
 test:
 	go test -v ./...
