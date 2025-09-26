@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 func main() {
-	fmt.Println("Hello from CodingKatas-Golang")
+	println("Hello, World!")
 }
