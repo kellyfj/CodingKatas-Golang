@@ -198,3 +198,77 @@ func TestSearchSmallestInCyclicallySortedArray(t *testing.T) {
 	min = searchSmallestInCyclicallySortedArray(arr)
 	assert.Equal(t, -1, min)
 }
+
+func TestGetBinaryRepresentation(t *testing.T) {
+	num := 5
+	binary := getBinaryRepresentation(num)
+	assert.Equal(t, "101", binary)
+
+	num = 0
+	binary = getBinaryRepresentation(num)
+	assert.Equal(t, "0", binary)
+
+	num = 10
+	binary = getBinaryRepresentation(num)
+	assert.Equal(t, "1010", binary)
+
+	num = 255
+	binary = getBinaryRepresentation(num)
+	assert.Equal(t, "11111111", binary)
+
+	num = 2147483647
+	binary = getBinaryRepresentation(num)
+	assert.Equal(t, "1111111111111111111111111111111", binary)
+}
+
+func TestMergeSortedArrays(t *testing.T) {
+	arr1 := []int{1, 3, 5}
+	arr2 := []int{2, 4, 6}
+	merged := mergeSortedArrays(arr1, arr2)
+	expected := []int{1, 2, 3, 4, 5, 6}
+	assert.Equal(t, expected, merged)
+
+	arr1 = []int{}
+	arr2 = []int{1, 2, 3}
+	merged = mergeSortedArrays(arr1, arr2)
+	expected = []int{1, 2, 3}
+	assert.Equal(t, expected, merged)
+
+	arr1 = []int{1, 2, 3}
+	arr2 = []int{}
+	merged = mergeSortedArrays(arr1, arr2)
+	expected = []int{1, 2, 3}
+	assert.Equal(t, expected, merged)
+
+	arr1 = []int{}
+	arr2 = []int{}
+	merged = mergeSortedArrays(arr1, arr2)
+	expected = []int{}
+	assert.Equal(t, expected, merged)
+}
+
+func TestMergeSortedArraysInPlace(t *testing.T) {
+	arr1 := []int{1, 3, 5, 0, 0, 0}
+	arr2 := []int{2, 4, 6}
+	mergeSortedArraysInPlace(arr1, 3, arr2, 3)
+	expected := []int{1, 2, 3, 4, 5, 6}
+	assert.Equal(t, expected, arr1)
+
+	arr1 = []int{0, 0, 0}
+	arr2 = []int{1, 2, 3}
+	mergeSortedArraysInPlace(arr1, 0, arr2, 3)
+	expected = []int{1, 2, 3}
+	assert.Equal(t, expected, arr1)
+
+	arr1 = []int{1, 2, 3}
+	arr2 = []int{}
+	mergeSortedArraysInPlace(arr1, 3, arr2, 0)
+	expected = []int{1, 2, 3}
+	assert.Equal(t, expected, arr1)
+
+	arr1 = []int{}
+	arr2 = []int{}
+	mergeSortedArraysInPlace(arr1, 0, arr2, 0)
+	expected = []int{}
+	assert.Equal(t, expected, arr1)
+}
