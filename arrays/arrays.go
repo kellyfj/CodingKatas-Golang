@@ -282,6 +282,17 @@ func searchSmallestInCyclicallySortedArray(arr []int) int {
 // public static int countBinaryOnes(int number) {
 
 // public static String getBinaryRepresentation(int number)
+func getBinaryRepresentation(number int) string {
+	if number == 0 {
+		return "0"
+	}
+	binary := ""
+	for number > 0 {
+		binary = string(rune('0'+(number%2))) + binary
+		number /= 2
+	}
+	return binary
+}
 
 // public static List<Set<Integer>> powerSet(int[] array) {
 
@@ -294,8 +305,62 @@ func searchSmallestInCyclicallySortedArray(arr []int) int {
 // public static double calcSquareRoot(double num)
 
 // public static List<List<Integer>> findCombosToReachTargetSum(List<Integer> numbers, int target) {
+func mergeSortedArrays(a, b []int) []int {
+	merged := make([]int, len(a)+len(b))
+	i, j, k := 0, 0, 0
+	for i < len(a) && j < len(b) {
+		if a[i] < b[j] {
+			merged[k] = a[i]
+			i++
+		} else {
+			merged[k] = b[j]
+			j++
+		}
+		k++
+	}
+	for i < len(a) {
+		merged[k] = a[i]
+		i++
+		k++
+	}
+	for j < len(b) {
+		merged[k] = b[j]
+		j++
+		k++
+	}
+	return merged
+}
 
-// public static int[] merge(int[] a, int[] b) {
+// MergeSortedArrays merges nums2 into nums1 in-place, assuming nums1 has enough space.
+//
+// Algorithmic flow:
+// 1. Start from the end of both arrays (nums1 and nums2), using three pointers:
+// - i: last valid element in nums1 (m-1)
+// - j: last element in nums2 (n-1)
+// - k: last position in nums1 (m+n-1)
+// 2. Compare nums1[i] and nums2[j], and place the larger at nums1[k]. Move the corresponding pointer(s) backward.
+// 3. Repeat until either i or j is exhausted.
+// 4. If nums2 has remaining elements, copy them into nums1 (nums1's remaining elements are already in place).
+func mergeSortedArraysInPlace(nums1 []int, m int, nums2 []int, n int) {
+	// Start from the end of both arrays
+	i, j, k := m-1, n-1, m+n-1
+	for i >= 0 && j >= 0 {
+		if nums1[i] > nums2[j] {
+			nums1[k] = nums1[i]
+			i--
+		} else {
+			nums1[k] = nums2[j]
+			j--
+		}
+		k--
+	}
+	// If nums2 is not exhausted, copy remaining elements
+	for j >= 0 {
+		nums1[k] = nums2[j]
+		j--
+		k--
+	}
+}
 
 // public static Integer[] mergeRemovingDupes(int[] a, int[] b) {
 
