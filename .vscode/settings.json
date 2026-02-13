@@ -1,0 +1,18 @@
+{
+  "terminal.integrated.shell.osx": "/bin/zsh",
+  "terminal.integrated.shellArgs.osx": ["-l"],
+  "terminal.integrated.inheritEnv": true,
+  "terminal.integrated.env.osx": {
+    "PATH": "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/kellyfj/.local/bin:/Users/kellyfj/.jenv/shims"
+  },
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.profiles.osx": {
+    "zsh": {
+      "path": "/bin/zsh",
+      "args": ["-l"],
+      "env": {
+        "PATH": "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/kellyfj/.local/bin:/Users/kellyfj/.jenv/shims"
+      }
+    }
+  }
+}

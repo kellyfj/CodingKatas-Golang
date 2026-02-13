@@ -153,3 +153,30 @@ func TestPrettyPrintSingleNode(t *testing.T) {
 	expected := "Node 1: []\n"
 	assert.Equal(t, expected, g.prettyPrint())
 }
+
+func TestDjikstra(t *testing.T) {
+	g := &Graph{}
+
+	// Create nodes
+	node1 := g.addNode(1)
+	node2 := g.addNode(2)
+	node3 := g.addNode(3)
+	node4 := g.addNode(4)
+
+	// Create weighted edges
+	g.addWeightedEdge(node1, node2, 1)
+	g.addWeightedEdge(node1, node3, 4)
+	g.addWeightedEdge(node2, node3, 2)
+	g.addWeightedEdge(node2, node4, 5)
+	g.addWeightedEdge(node3, node4, 1)
+
+	// Test Dijkstra's algorithm
+	path, distance := dijkstra(node1, node4)
+	assert.Equal(t, 4, distance)
+	expectedValues := []int{1, 2, 3, 4}
+	actualValues := make([]int, len(path))
+	for i, node := range path {
+		actualValues[i] = node.value
+	}
+	assert.Equal(t, expectedValues, actualValues)
+}
