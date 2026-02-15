@@ -345,18 +345,75 @@ func OnlineMedian(stream []int) []float64 {
  * Time Complexity: O(n log n) due to sorting the entire array, which is inefficient for large n.
  * Space Complexity: O(n) due to storing the entire array in the heap, which is inefficient for large n.
  */
-func NSmallest(arr []int, n int) []int {
-	h := &FixedSizeHeap{size: n}
-	heap.Init(h)
+type MinHeapInt []int
 
-	for _, num := range arr {
-		h.Add(num)
+func (h MinHeapInt) Len() int           { return len(h) }
+func (h MinHeapInt) Less(i, j int) bool { return h[i] < h[j] }
+func (h MinHeapInt) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
+
+func (h *MinHeapInt) Push(x any) {
+	*h = append(*h, x.(int))
+}
+
+func (h *MinHeapInt) Pop() any {
+	old := *h
+	n := len(old)
+	x := old[n-1]
+	*h = old[:n-1]
+	return x
+}
+func getNSmallestHeap(arr []int, n int) []int {
+	if n <= 0 {
+		return []int{}
+	}
+	if n >= len(arr) {
+		n = len(arr)
 	}
 
-	result := make([]int, h.Len())
-	for i := 0; i < len(result); i++ {
-		result[i] = heap.Pop(h).(int)
+	h := MinHeapInt(make([]int, len(arr)))
+	copy(h, arr)
+	heap.Init(&h)
+
+	result := make([]int, n)
+	for i := range result {
+		result[i] = heap.Pop(&h).(int)
+	}
+	return result
+}
+
+type MaxHeapInt []int
+
+func (h MaxHeapInt) Len() int           { return len(h) }
+func (h MaxHeapInt) Less(i, j int) bool { return h[i] > h[j] }
+func (h MaxHeapInt) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
+
+func (h *MaxHeapInt) Push(x any) {
+	*h = append(*h, x.(int))
+}
+
+func (h *MaxHeapInt) Pop() any {
+	old := *h
+	n := len(old)
+	x := old[n-1]
+	*h = old[:n-1]
+	return x
+}
+
+func getNLargestHeap(arr []int, n int) []int {
+	if n <= 0 {
+		return []int{}
+	}
+	if n >= len(arr) {
+		n = len(arr)
 	}
 
+	h := MaxHeapInt(make([]int, len(arr)))
+	copy(h, arr)
+	heap.Init(&h)
+
+	result := make([]int, n)
+	for i := range result {
+		result[(n-1)-i] = heap.Pop(&h).(int)
+	}
 	return result
 }

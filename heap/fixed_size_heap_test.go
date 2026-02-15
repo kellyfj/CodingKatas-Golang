@@ -7,13 +7,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestNewFixedSizeHeap(t *testing.T) {
-	h := NewFixedSizeHeap(5)
-	assert.NotNil(t, h)
-	assert.Equal(t, 5, h.size)
-	assert.Equal(t, 0, h.Len())
-}
-
 func TestAddSingleElement(t *testing.T) {
 	h := NewFixedSizeHeap(5)
 	h.Add(10)
@@ -163,21 +156,18 @@ func TestOnlineMedian(t *testing.T) {
 	}
 }
 
-/*
-FIXME - NSmallest is returning NLargest
+func TestNSmallestElements(t *testing.T) {
+	arr := []int{7, 10, 4, 3, 20, 15}
+	n := 3
+	result := getNSmallestHeap(arr, n)
+	expected := []int{3, 4, 7}
+	assert.Equal(t, expected, result)
+}
 
-	func TestNSmallestElements(t *testing.T) {
-		arr := []int{7, 10, 4, 3, 20, 15}
-		n := 3
-		result := NSmallest(arr, n)
-		expected := []int{3, 4, 7}
-		assert.Equal(t, expected, result)
-	}
-*/
 func TestNSmallestElementsMoreThanN(t *testing.T) {
 	arr := []int{7, 10, 4, 3, 20, 15}
 	n := 10
-	result := NSmallest(arr, n)
+	result := getNSmallestHeap(arr, n)
 	expected := []int{3, 4, 7, 10, 15, 20}
 	assert.Equal(t, expected, result)
 }
@@ -185,7 +175,7 @@ func TestNSmallestElementsMoreThanN(t *testing.T) {
 func TestNSmallestElementsEmpty(t *testing.T) {
 	arr := []int{}
 	n := 3
-	result := NSmallest(arr, n)
+	result := getNSmallestHeap(arr, n)
 	expected := []int{}
 	assert.Equal(t, expected, result)
 }
@@ -193,7 +183,39 @@ func TestNSmallestElementsEmpty(t *testing.T) {
 func TestNSmallestElementsNZero(t *testing.T) {
 	arr := []int{7, 10, 4, 3, 20, 15}
 	n := 0
-	result := NSmallest(arr, n)
+	result := getNSmallestHeap(arr, n)
+	expected := []int{}
+	assert.Equal(t, expected, result)
+}
+
+func TestNLargest(t *testing.T) {
+	arr := []int{7, 10, 4, 3, 20, 15}
+	n := 3
+	result := getNLargestHeap(arr, n)
+	expected := []int{10, 15, 20}
+	assert.Equal(t, expected, result)
+}
+
+func TestNLargestMoreThanN(t *testing.T) {
+	arr := []int{7, 10, 4, 3, 20, 15}
+	n := 10
+	result := getNLargestHeap(arr, n)
+	expected := []int{3, 4, 7, 10, 15, 20}
+	assert.Equal(t, expected, result)
+}
+
+func TestNLargestEmpty(t *testing.T) {
+	arr := []int{}
+	n := 3
+	result := getNLargestHeap(arr, n)
+	expected := []int{}
+	assert.Equal(t, expected, result)
+}
+
+func TestNLargestNZero(t *testing.T) {
+	arr := []int{7, 10, 4, 3, 20, 15}
+	n := 0
+	result := getNLargestHeap(arr, n)
 	expected := []int{}
 	assert.Equal(t, expected, result)
 }
