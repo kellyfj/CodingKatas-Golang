@@ -87,8 +87,6 @@ func merge(input, left, right []int) {
 	}
 }
 
-// public static void quickSort(int[] input) {
-
 func quickSort(input []int) {
 	if len(input) < 2 {
 		return
