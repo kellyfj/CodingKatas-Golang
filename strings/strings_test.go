@@ -62,3 +62,13 @@ func TestReverseWords(t *testing.T) {
 	assert.Equal(t, "two one", reverseAllWords("one two"))
 	assert.Equal(t, " space extra one", reverseAllWords("one extra space "))
 }
+
+func TestReverseWordsWithoutSplit(t *testing.T) {
+	rev := reverseWordsWithoutSplit("able was I ere I saw elba")
+	assert.Equal(t, "elba saw I ere I was able", rev)
+
+	assert.Equal(t, "", reverseWordsWithoutSplit(""))
+	assert.Equal(t, "one", reverseWordsWithoutSplit("one"))
+	assert.Equal(t, "two one", reverseWordsWithoutSplit("one two"))
+	assert.Equal(t, " space extra one", reverseWordsWithoutSplit("one extra space "))
+}

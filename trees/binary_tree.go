@@ -168,9 +168,36 @@ func inorderTraversal(root *Node) []int {
 	return result
 }
 
-// TBD
 func inorderOrder1Space(root *Node) []int {
-	return nil
+	if root == nil {
+		return []int{}
+	}
+
+	result := []int{}
+	current := root
+
+	for current != nil {
+		if current.Left == nil {
+			result = append(result, current.Value)
+			current = current.Right
+		} else {
+			predecessor := current.Left
+			for predecessor.Right != nil && predecessor.Right != current {
+				predecessor = predecessor.Right
+			}
+
+			if predecessor.Right == nil {
+				predecessor.Right = current
+				current = current.Left
+			} else {
+				predecessor.Right = nil
+				result = append(result, current.Value)
+				current = current.Right
+			}
+		}
+	}
+
+	return result
 }
 
 func postorderTraversal(root *Node) []int {
