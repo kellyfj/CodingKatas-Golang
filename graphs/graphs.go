@@ -11,7 +11,7 @@ type Node struct {
 	value    int
 	adjacent []*Node
 	edges    map[*Node]int // weighted edges: node -> distance
-	previous *Node
+	// previous *Node
 }
 
 func (n *Node) addAdjacent(node *Node) {
