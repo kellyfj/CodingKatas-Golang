@@ -79,6 +79,37 @@ func reverseWordsWithoutSplit(in string) string {
 
 // func isMatch(regex string, s string)
 
+func findAnagrams(s []string) [][]string {
+	anagramMap := make(map[string][]string)
+
+	// Algorithm: For each word, sort the characters to get a canonical form.
+	// Use this sorted string as a key in a map,
+	for _, word := range s {
+		lowerWord := strings.ToLower(word)
+		sorted := sortString(lowerWord)
+		anagramMap[sorted] = append(anagramMap[sorted], word)
+	}
+
+	// The values return in the result will be the groups of anagrams.
+	result := make([][]string, 0, len(anagramMap))
+	for _, group := range anagramMap {
+		result = append(result, group)
+	}
+	return result
+}
+
+func sortString(s string) string {
+	r := []rune(s)
+	for i := 0; i < len(r)-1; i++ {
+		for j := 0; j < len(r)-i-1; j++ {
+			if r[j] > r[j+1] {
+				r[j], r[j+1] = r[j+1], r[j]
+			}
+		}
+	}
+	return string(r)
+}
+
 //  Compute Levenshtein Distance
 
 // Get all permutations of a string

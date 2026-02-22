@@ -72,3 +72,38 @@ func TestReverseWordsWithoutSplit(t *testing.T) {
 	assert.Equal(t, "two one", reverseWordsWithoutSplit("one two"))
 	assert.Equal(t, " space extra one", reverseWordsWithoutSplit("one extra space "))
 }
+
+func TestFindAnagrams(t *testing.T) {
+	ans := findAnagrams([]string{"listen", "silent"})
+	assert.Equal(t, 1, len(ans))
+	assert.Equal(t, []string{"listen", "silent"}, ans[0])
+	ans = findAnagrams([]string{"triangle", "integral"})
+	assert.Equal(t, 1, len(ans))
+	assert.Equal(t, []string{"triangle", "integral"}, ans[0])
+	ans = findAnagrams([]string{"hello", "world"})
+	assert.Equal(t, 2, len(ans))
+	assert.True(t, arrayContains(ans, "hello"))
+	assert.True(t, arrayContains(ans, "world"))
+	ans = findAnagrams([]string{"a", "a"})
+	assert.Equal(t, 1, len(ans))
+	assert.Equal(t, []string{"a", "a"}, ans[0])
+	ans = findAnagrams([]string{"", ""})
+	assert.Equal(t, 1, len(ans))
+	ans = findAnagrams([]string{"DirtyRoom", "DirtyRoom"})
+	assert.Equal(t, 1, len(ans))
+	assert.Equal(t, []string{"DirtyRoom", "DirtyRoom"}, ans[0])
+	ans = findAnagrams([]string{"able", "ELBA"})
+	assert.Equal(t, 1, len(ans))
+	assert.Equal(t, []string{"able", "ELBA"}, ans[0])
+}
+
+func arrayContains(ans [][]string, s string) bool {
+	for _, arr := range ans {
+		for _, str := range arr {
+			if str == s {
+				return true
+			}
+		}
+	}
+	return false
+}
