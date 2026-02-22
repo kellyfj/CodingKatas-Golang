@@ -107,3 +107,13 @@ func arrayContains(ans [][]string, s string) bool {
 	}
 	return false
 }
+
+func TestLongestCommonSubstring(t *testing.T) {
+	assert.Equal(t, longestCommonSubstring("abcde", "abfce"), "ab")
+	assert.Equal(t, longestCommonSubstring("abcdef", "xyz"), "")
+	assert.Equal(t, longestCommonSubstring("abc", "abc"), "abc")
+	assert.Equal(t, longestCommonSubstring("", "abc"), "")
+	assert.Equal(t, longestCommonSubstring("abc", ""), "")
+	assert.Equal(t, longestCommonSubstring("abcde", "fghij"), "")
+	assert.Equal(t, longestCommonSubstring("ababc", "abcdaba"), "abc")
+}

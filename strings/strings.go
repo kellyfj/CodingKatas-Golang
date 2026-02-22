@@ -120,7 +120,29 @@ func sortString(s string) string {
 
 // Find longest palindrome
 
-//Longest common substring
+// Longest common substring
+func longestCommonSubstring(s1, s2 string) string {
+
+	// Algorithm: Create a map of all substrings of s1. Then iterate through all substrings of
+	// s2 and check if they are in the map.
+	m := make(map[string]bool)
+	for i := 0; i < len(s1); i++ {
+		for j := i + 1; j <= len(s1); j++ {
+			m[s1[i:j]] = true
+		}
+	}
+
+	longest := ""
+	for i := 0; i < len(s2); i++ {
+		for j := i + 1; j <= len(s2); j++ {
+			substr := s2[i:j]
+			if m[substr] && len(substr) > len(longest) {
+				longest = substr
+			}
+		}
+	}
+	return longest
+}
 
 //Add number strings (with converting type)
 
